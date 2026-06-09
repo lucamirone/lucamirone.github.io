@@ -1,0 +1,13 @@
+BEGIN:VCARD
+VERSION:3.0
+N:Mirone;Luca;;;
+FN:Luca Mirone
+ORG:Business Advisory
+TITLE:Business Advisory
+TEL;TYPE=CELL:+19173704886
+EMAIL:Luca@lucamirone.com
+URL:https://www.lucamirone.com
+URL;TYPE=LinkedIn:https://www.linkedin.com/in/lucamirone/
+ADR;TYPE=WORK:;;Fort Lauderdale;Florida;;;United States
+NOTE:Business Advisory
+END:VCARD
