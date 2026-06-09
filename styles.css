@@ -1758,6 +1758,20 @@ a, button, summary, input, select, textarea { transition: var(--transition); }
   .consultation h2,
   .approach-copy h2 { font-size: 46px; }
   .approach-image { min-height: 370px; border-radius: var(--radius-md); }
+  .approach-value {
+    min-height: 88px;
+    padding: 16px 12px;
+    justify-content: center;
+    gap: 18px;
+    font-size: 11px;
+    line-height: 1.5;
+    text-align: center;
+  }
+  .approach-icon {
+    width: 48px;
+    height: 48px;
+    flex: 0 0 auto;
+  }
   .case-grid { gap: 36px; }
   .case-grid blockquote { font-size: 22px; }
   .engagement-accordion { padding-left: 0; }
