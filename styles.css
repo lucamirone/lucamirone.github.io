@@ -1654,12 +1654,31 @@ a, button, summary, input, select, textarea { transition: var(--transition); }
 .form-success p { color: rgba(255,255,255,.72); }
 
 .site-footer {
+  position: relative;
+  left: 50%;
+  width: 100vw;
+  max-width: none;
+  margin-left: -50vw;
   padding: 62px max(24px, calc((100vw - var(--container)) / 2)) 34px;
   background: #05182e;
   border-top: 1px solid rgba(255,255,255,.1);
 }
 .site-footer p,
 .footer-contact > a:nth-child(2) { color: rgba(255,255,255,.62); }
+.contact-card-button {
+  min-height: 50px;
+  padding-inline: 22px;
+  color: var(--color-navy);
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  box-shadow: 0 10px 24px rgba(0,0,0,.18);
+}
+.contact-card-button:hover {
+  color: var(--color-navy);
+  background: #c6a166;
+  border-color: #c6a166;
+  box-shadow: 0 12px 28px rgba(0,0,0,.24);
+}
 .copyright { font-family: var(--font-ui); }
 
 .approach-image img,
