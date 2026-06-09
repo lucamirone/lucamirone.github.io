@@ -1261,13 +1261,28 @@ a, button, summary, input, select, textarea { transition: var(--transition); }
 }
 .header-cta { min-height: 42px; padding-inline: 17px; }
 .text-link {
+  min-height: 48px;
+  padding: 0 22px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   color: var(--color-text);
+  border: 1px solid var(--color-accent);
+  border-radius: var(--radius-sm);
   font-family: var(--font-ui);
   font-size: 10px;
   font-weight: 700;
   letter-spacing: .11em;
+  transition: color var(--transition), background var(--transition), border-color var(--transition), transform var(--transition);
 }
 .text-link span { color: var(--color-accent); }
+.text-link:hover {
+  color: var(--white);
+  background: var(--color-accent-dark);
+  border-color: var(--color-accent-dark);
+  transform: translateY(-2px);
+}
+.text-link:hover span { color: var(--white); }
 
 .hero-reference { display: none; }
 .hero {
