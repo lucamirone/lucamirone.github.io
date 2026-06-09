@@ -1744,7 +1744,7 @@ a, button, summary, input, select, textarea { transition: var(--transition); }
   .hero-actions { align-items: stretch; }
   .hero-actions .button,
   .hero-actions .text-link { width: 100%; justify-content: center; text-align: center; }
-  .hero-values { margin-top: 38px; padding-top: 16px; grid-template-columns: 1fr; }
+  .hero-values { display: none; }
   .hero-value { font-size: 9px; }
   .hero-visual { height: 340px; min-height: 340px; aspect-ratio: auto; }
   .approach,
