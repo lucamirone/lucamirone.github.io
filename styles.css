@@ -1786,5 +1786,8 @@ a, button, summary, input, select, textarea { transition: var(--transition); }
   .intake-form select,
   .intake-form textarea { font-size: 16px; }
   .intake-form { min-height: 0; padding: 24px 18px; border-radius: var(--radius-md); }
-  .site-footer { padding-inline: 20px; }
+  .site-footer {
+    width: 100vw;
+    padding-inline: 20px;
+  }
 }
