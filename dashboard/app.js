@@ -33,25 +33,39 @@ function queryDates() {
 
 async function loadDashboard() {
   const banner = document.querySelector("#status-banner");
+  const loginError = document.querySelector("#login-error");
+  loginError.hidden = true;
   banner.textContent = "Loading secure GA4 reporting data…";
+  banner.classList.remove("error");
   try {
     const response = await fetch(`/api/analytics?${queryDates()}`, {
       headers: { authorization: state.authorization }
     });
     const payload = await response.json();
-    if (!response.ok) throw new Error(payload.error || "Unable to load dashboard");
+    if (!response.ok) {
+      const error = new Error(payload.error || "Unable to load dashboard");
+      error.status = response.status;
+      throw error;
+    }
     state.data = payload;
     render(payload);
     document.querySelector("#login-panel").hidden = true;
     document.querySelector("#dashboard-content").hidden = false;
     banner.textContent = "Live GA4 data. Qualified-intent events are aggregated and anonymous.";
   } catch (error) {
-    sessionStorage.removeItem("dashboardAuthorization");
-    document.querySelector("#login-panel").hidden = false;
-    document.querySelector("#dashboard-content").hidden = true;
-    const message = document.querySelector("#login-error");
-    message.textContent = error.message;
-    message.hidden = false;
+    if (error.status === 401) {
+      sessionStorage.removeItem("dashboardAuthorization");
+      document.querySelector("#login-panel").hidden = false;
+      document.querySelector("#dashboard-content").hidden = true;
+      loginError.textContent = "The username or password is incorrect.";
+      loginError.hidden = false;
+      return;
+    }
+
+    document.querySelector("#login-panel").hidden = true;
+    document.querySelector("#dashboard-content").hidden = false;
+    banner.classList.add("error");
+    banner.textContent = `Dashboard setup required: ${error.message}`;
   }
 }
 
