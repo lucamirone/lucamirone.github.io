@@ -1,0 +1,9 @@
+{
+  "name": "luca-mirone-lead-intelligence",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vercel dev",
+    "check": "node --check api/analytics.js && node --check lib/ga4.js && node --check lib/lead-scoring.js && node --check app.js"
+  }
+}

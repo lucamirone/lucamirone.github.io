@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex,nofollow" />
+    <title>Luca Mirone | Lead Intelligence</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/styles.css" />
+    <script src="/app.js" defer></script>
+  </head>
+  <body>
+    <aside class="sidebar">
+      <a class="brand" href="/dashboard">Luca Mirone<span>Lead Intelligence</span></a>
+      <nav>
+        <a href="#overview" class="active">Executive overview</a>
+        <a href="#intent">Lead intelligence</a>
+        <a href="#funnel">Lead funnel</a>
+        <a href="#sources">Source quality</a>
+        <a href="#experience">Website experience</a>
+        <a href="#actions">Business actions</a>
+      </nav>
+      <div class="privacy-note">
+        <strong>Privacy-first reporting</strong>
+        Aggregated GA4 behavior only. No names, emails, phone numbers, messages, or form answers.
+      </div>
+    </aside>
+
+    <main>
+      <header class="topbar">
+        <div>
+          <p class="context-line">Private business intelligence</p>
+          <h1>Qualified interest, not just traffic.</h1>
+          <p>Understand which behaviors indicate real advisory and consultation intent.</p>
+        </div>
+        <div class="controls">
+          <label>Date range
+            <select id="date-range">
+              <option value="7daysAgo">Last 7 days</option>
+              <option value="30daysAgo" selected>Last 30 days</option>
+              <option value="90daysAgo">Last 90 days</option>
+              <option value="ytd">Year to date</option>
+              <option value="custom">Custom range</option>
+            </select>
+          </label>
+          <div id="custom-dates" class="custom-dates" hidden>
+            <input id="start-date" type="date" aria-label="Start date" />
+            <input id="end-date" type="date" aria-label="End date" />
+          </div>
+          <button id="refresh" type="button">Refresh</button>
+        </div>
+      </header>
+
+      <section id="login-panel" class="login-panel">
+        <div>
+          <h2>Private dashboard access</h2>
+          <p>Enter the dashboard credentials configured in Vercel. Credentials stay in this browser session.</p>
+        </div>
+        <form id="login-form">
+          <label>Username<input id="username" autocomplete="username" required /></label>
+          <label>Password<input id="password" type="password" autocomplete="current-password" required /></label>
+          <button type="submit">Open dashboard</button>
+        </form>
+        <p id="login-error" class="error" hidden></p>
+      </section>
+
+      <div id="dashboard-content" hidden>
+        <div id="status-banner" class="status-banner" role="status"></div>
+
+        <section id="overview" class="dashboard-section">
+          <div class="section-heading">
+            <div><p>Executive overview</p><h2>Is the website creating qualified business interest?</h2></div>
+            <span id="last-updated"></span>
+          </div>
+          <div id="overview-cards" class="metric-grid"></div>
+        </section>
+
+        <section id="intent" class="dashboard-section split-layout">
+          <article class="panel lead-panel">
+            <div class="panel-heading"><div><p>Lead score overview</p><h3>Intent strength</h3></div><span class="method">0–100+ model</span></div>
+            <div id="lead-score" class="lead-score"></div>
+            <div id="lead-tier-bars" class="tier-bars"></div>
+            <p class="panel-note">Lead tiers are anonymous behavioral aggregates, not identified people.</p>
+          </article>
+          <article class="panel">
+            <div class="panel-heading"><div><p>High-intent activity</p><h3>Recent qualified signals</h3></div></div>
+            <div id="activity-table" class="table-wrap"></div>
+          </article>
+        </section>
+
+        <section id="funnel" class="dashboard-section">
+          <div class="section-heading"><div><p>Lead funnel</p><h2>From first visit to direct contact</h2></div></div>
+          <div id="lead-funnel" class="funnel"></div>
+        </section>
+
+        <section id="sources" class="dashboard-section split-layout">
+          <article class="panel">
+            <div class="panel-heading"><div><p>Traffic source quality</p><h3>Intent per session</h3></div></div>
+            <div id="source-quality"></div>
+          </article>
+          <article class="panel">
+            <div class="panel-heading"><div><p>Lead score trend</p><h3>Qualified activity over time</h3></div></div>
+            <div id="trend-chart" class="trend-chart"></div>
+          </article>
+        </section>
+
+        <section id="experience" class="dashboard-section">
+          <div class="section-heading"><div><p>Website experience</p><h2>Where interest grows or drops</h2></div></div>
+          <div class="three-column">
+            <article class="panel"><div class="panel-heading"><div><p>Sections</p><h3>Performance</h3></div></div><div id="page-table" class="table-wrap"></div></article>
+            <article class="panel"><div class="panel-heading"><div><p>Assessment</p><h3>Form intelligence</h3></div></div><div id="form-intelligence"></div></article>
+            <article class="panel"><div class="panel-heading"><div><p>Device quality</p><h3>UX signals</h3></div></div><div id="device-table" class="table-wrap"></div></article>
+          </div>
+          <article class="panel geography-panel">
+            <div class="panel-heading"><div><p>Geography and market interest</p><h3>Priority markets</h3></div></div>
+            <div id="geography-table" class="table-wrap"></div>
+          </article>
+        </section>
+
+        <section id="actions" class="dashboard-section action-layout">
+          <article class="action-panel">
+            <p>Suggested business actions</p>
+            <h2>What the current signals suggest</h2>
+            <div id="suggested-actions"></div>
+          </article>
+          <article class="recommendations-panel">
+            <p>Website recommendations</p>
+            <h3>Prioritized improvements</h3>
+            <ol>
+              <li>Strengthen the clearest high-intent CTA near the best-performing section.</li>
+              <li>Reduce assessment friction if starts materially exceed submissions.</li>
+              <li>Compare mobile form completion against desktop before changing the form.</li>
+              <li>Use explicit campaign links for LinkedIn, email outreach, and partner referrals.</li>
+              <li>Review this dashboard monthly after enough qualified-intent events accumulate.</li>
+            </ol>
+          </article>
+        </section>
+      </div>
+    </main>
+  </body>
+</html>

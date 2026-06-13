@@ -26,7 +26,32 @@ const engagementItems = [...document.querySelectorAll(".engagement-item")];
 const deliveryEmail = "Luca@lucamirone.com";
 const analyticsConsentKey = "lucamirone-analytics-consent";
 const analyticsMeasurementId = "G-3RNHB3J5TY";
+const analyticsVisitKey = "lucamirone-last-visit";
+const analyticsSessionVisitKey = "lucamirone-session-visit-recorded";
+const analyticsLeadScoreKey = "lucamirone-lead-score";
 let analyticsLoaded = false;
+let assessmentStarted = false;
+
+const leadScoreValues = {
+  page_view: 5,
+  approach_section_view: 10,
+  services_section_view: 10,
+  contact_section_view: 10,
+  consultation_click: 10,
+  advisory_brief_click: 10,
+  scroll_50: 10,
+  scroll_75: 15,
+  assessment_toggle_open: 15,
+  assessment_start: 25,
+  assessment_submit: 50,
+  email_click: 35,
+  phone_click: 35,
+  vcard_download: 30,
+  linkedin_click: 20,
+  return_visit: 20,
+  long_session_2min: 15,
+  long_session_5min: 25
+};
 
 function loadGoogleAnalytics() {
   if (analyticsLoaded || typeof window.gtag !== "function") return;
@@ -39,6 +64,7 @@ function loadGoogleAnalytics() {
 
   window.gtag("js", new Date());
   window.gtag("config", analyticsMeasurementId);
+  updateLeadScore("page_view");
 }
 
 function updateAnalyticsConsent(granted) {
@@ -54,7 +80,48 @@ function trackAnalyticsEvent(name, parameters = {}) {
     localStorage.getItem(analyticsConsentKey) !== "granted" ||
     typeof window.gtag !== "function"
   ) return;
-  window.gtag("event", name, parameters);
+  window.gtag("event", name, {
+    page_path: window.location.pathname,
+    page_title: document.title,
+    language: document.documentElement.lang || navigator.language,
+    ...parameters
+  });
+}
+
+function getLeadTier(score) {
+  if (score >= 60) return "hot";
+  if (score >= 25) return "warm";
+  return "cold";
+}
+
+function recordLeadSignal(name, parameters = {}) {
+  trackAnalyticsEvent(name, parameters);
+  updateLeadScore(name);
+}
+
+function updateLeadScore(name) {
+  const points = leadScoreValues[name] || 0;
+  if (!points) return;
+
+  const nextScore = Number(sessionStorage.getItem(analyticsLeadScoreKey) || 0) + points;
+  sessionStorage.setItem(analyticsLeadScoreKey, String(nextScore));
+  trackAnalyticsEvent("lead_score_update", {
+    score_value: nextScore,
+    score_points_added: points,
+    lead_tier: getLeadTier(nextScore),
+    signal_name: name
+  });
+}
+
+function getSafeInterests(form, fieldNames) {
+  if (!form) return "not_provided";
+  const selector = fieldNames.map((fieldName) => `[name="${fieldName}"]`).join(",");
+  const selected = [...form.querySelectorAll(selector)]
+    .filter((field) => field.matches("select") || field.checked)
+    .map((field) => field.value)
+    .filter(Boolean)
+    .slice(0, 3);
+  return selected.length ? selected.join(" | ") : "not_provided";
 }
 
 function configureAnalyticsConsent() {
@@ -68,6 +135,7 @@ function configureAnalyticsConsent() {
     localStorage.setItem(analyticsConsentKey, "granted");
     updateAnalyticsConsent(true);
     banner.hidden = true;
+    configureIntentTracking();
   });
 
   document.querySelector("#reject-analytics")?.addEventListener("click", () => {
@@ -76,18 +144,129 @@ function configureAnalyticsConsent() {
     banner.hidden = true;
   });
 
-  document.querySelectorAll('a[href$=".vcf"]').forEach((link) => {
-    link.addEventListener("click", () => {
-      trackAnalyticsEvent("contact_download", { file_name: "luca-mirone-contact.vcf" });
+  if (savedConsent === "granted") configureIntentTracking();
+}
+
+function configureIntentTracking() {
+  if (document.documentElement.dataset.intentTrackingReady === "true") return;
+  document.documentElement.dataset.intentTrackingReady = "true";
+
+  const assessmentForm = document.querySelector("#advisory-assessment");
+  const submittedForm = new URLSearchParams(window.location.search).get("submitted");
+  const visitTimestamp = Number(localStorage.getItem(analyticsVisitKey) || 0);
+  const thirtyDays = 30 * 24 * 60 * 60 * 1000;
+
+  if (!sessionStorage.getItem(analyticsSessionVisitKey)) {
+    if (visitTimestamp && Date.now() - visitTimestamp <= thirtyDays) {
+      recordLeadSignal("return_visit");
+    }
+    localStorage.setItem(analyticsVisitKey, String(Date.now()));
+    sessionStorage.setItem(analyticsSessionVisitKey, "true");
+  }
+
+  document.addEventListener("click", (event) => {
+    const link = event.target.closest("a, button");
+    if (!link) return;
+
+    const href = link.getAttribute("href") || "";
+    const buttonText = (link.innerText || link.getAttribute("aria-label") || "")
+      .trim()
+      .slice(0, 80);
+    const sectionName = link.closest("section, footer")?.id || "global";
+    const parameters = { button_text: buttonText, section_name: sectionName };
+
+    if (href.startsWith("mailto:")) recordLeadSignal("email_click", parameters);
+    if (href.startsWith("tel:")) recordLeadSignal("phone_click", parameters);
+    if (href.includes("linkedin.com")) recordLeadSignal("linkedin_click", parameters);
+    if (href.endsWith(".vcf")) recordLeadSignal("vcard_download", parameters);
+    if (/consult/i.test(buttonText)) recordLeadSignal("consultation_click", parameters);
+    if (/advisory brief/i.test(buttonText)) recordLeadSignal("advisory_brief_click", parameters);
+    if (href === "#contact" || href.startsWith("mailto:") || href.startsWith("tel:")) {
+      trackAnalyticsEvent("contact_click", { ...parameters, link_type: href.split(":")[0] || "anchor" });
+    }
+  });
+
+  assessmentToggle?.addEventListener("click", () => {
+    if (assessmentToggle.getAttribute("aria-expanded") !== "true") {
+      recordLeadSignal("assessment_toggle_open", { section_name: "assessment" });
+    }
+  });
+
+  assessmentForm?.addEventListener("input", () => {
+    if (assessmentStarted) return;
+    assessmentStarted = true;
+    recordLeadSignal("assessment_start", {
+      section_name: "assessment",
+      form_step: "1"
     });
   });
 
-  document.querySelector("#advisory-assessment")?.addEventListener("submit", () => {
-    trackAnalyticsEvent("generate_lead", { form_name: "advisory_assessment" });
+  assessmentGroups.forEach((group, index) => {
+    group.addEventListener("toggle", () => {
+      if (!group.open) return;
+      trackAnalyticsEvent("assessment_step_progress", {
+        section_name: "assessment",
+        form_step: String(index + 1)
+      });
+    });
   });
+
+  document.querySelectorAll("form").forEach((form) => {
+    form.addEventListener("invalid", (event) => {
+      trackAnalyticsEvent("form_error", {
+        form_name: form.id || "unknown",
+        field_type: event.target.type || event.target.tagName.toLowerCase()
+      });
+    }, true);
+  });
+
+  assessmentForm?.addEventListener("submit", () => {
+    recordLeadSignal("assessment_submit", {
+      form_name: "advisory_assessment",
+      market_interest: getSafeInterests(assessmentForm, ["assessment_target_market", "assessment_market_support"]),
+      service_interest: getSafeInterests(assessmentForm, ["assessment_support_type"])
+    });
+  });
+
   document.querySelector("#intake-form")?.addEventListener("submit", () => {
-    trackAnalyticsEvent("generate_lead", { form_name: "contact_form" });
+    trackAnalyticsEvent("contact_submit", { form_name: "contact_form" });
   });
+
+  if (submittedForm) {
+    trackAnalyticsEvent("form_success", { form_name: submittedForm });
+  }
+
+  const sectionEvents = {
+    approach: "approach_section_view",
+    engagement: "services_section_view",
+    contact: "contact_section_view"
+  };
+  const sectionObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting || entry.target.dataset.analyticsViewed === "true") return;
+      entry.target.dataset.analyticsViewed = "true";
+      recordLeadSignal(sectionEvents[entry.target.id], { section_name: entry.target.id });
+    });
+  }, { threshold: 0.45 });
+  Object.keys(sectionEvents).forEach((id) => {
+    const section = document.querySelector(`#${id}`);
+    if (section) sectionObserver.observe(section);
+  });
+
+  const scrollMilestones = new Set();
+  window.addEventListener("scroll", () => {
+    const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+    if (scrollable <= 0) return;
+    const percent = Math.round((window.scrollY / scrollable) * 100);
+    [50, 75, 90].forEach((milestone) => {
+      if (percent < milestone || scrollMilestones.has(milestone)) return;
+      scrollMilestones.add(milestone);
+      recordLeadSignal(`scroll_${milestone}`, { percent_scrolled: milestone });
+    });
+  }, { passive: true });
+
+  window.setTimeout(() => recordLeadSignal("long_session_2min"), 2 * 60 * 1000);
+  window.setTimeout(() => recordLeadSignal("long_session_5min"), 5 * 60 * 1000);
 }
 
 function addHiddenField(form, name, value) {
