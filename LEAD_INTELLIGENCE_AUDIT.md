@@ -6,7 +6,7 @@
 - **Hosting:** GitHub Pages, served from the repository root at `lucamirone.com`.
 - **Backend:** None. The public site has no secure server or serverless runtime.
 - **Forms:** The consultation and Initial Advisory Assessment forms submit to `formsubmit.co`.
-- **Analytics:** Consent-aware GA4 is installed with measurement ID `G-3RNHB3J5TY`.
+- **Analytics:** Consent-aware GA4 is installed with measurement ID `G-5L3N934J2F`.
 
 ## Existing Analytics Before This Change
 
