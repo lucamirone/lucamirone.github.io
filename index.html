@@ -24,13 +24,14 @@
       href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Manrope:wght@300;400;500;600&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css?v=assessment-submission-20260610" />
+    <link rel="alternate" hreflang="en" href="https://www.lucamirone.com/" />
+    <link rel="alternate" hreflang="it" href="https://www.lucamirone.com/it/" />
+    <link rel="stylesheet" href="styles.css?v=language-switch-20260613" />
     <script src="script.js?v=lead-intelligence-20260612" defer></script>
   </head>
   <body>
     <header class="site-header">
       <a class="wordmark" href="#home" aria-label="Luca Mirone home">Luca Mirone</a>
-      <button class="menu-button" aria-expanded="false" aria-controls="site-nav">Menu</button>
       <nav id="site-nav" aria-label="Main navigation">
         <a href="#home">Home</a>
         <a href="#approach">Approach</a>
@@ -38,6 +39,24 @@
         <a class="assessment-nav-link" href="#assessment">Assessment</a>
         <a href="#contact">Contact</a>
       </nav>
+      <div class="language-switcher" aria-label="Language selection">
+        <a class="language-flag active" href="./" lang="en" hreflang="en" aria-label="English" aria-current="page">
+          <svg viewBox="0 0 28 20" aria-hidden="true">
+            <rect width="28" height="20" fill="#fff" />
+            <path d="M0 0h28v2H0zm0 4h28v2H0zm0 4h28v2H0zm0 4h28v2H0zm0 4h28v2H0z" fill="#b22234" />
+            <rect width="12" height="10" fill="#3c3b6e" />
+            <path d="M2 2h1v1H2zm3 0h1v1H5zm3 0h1v1H8zm-6 3h1v1H2zm3 0h1v1H5zm3 0h1v1H8zm-6 3h1v1H2zm3 0h1v1H5zm3 0h1v1H8z" fill="#fff" />
+          </svg>
+        </a>
+        <a class="language-flag" href="it/" lang="it" hreflang="it" aria-label="Italiano">
+          <svg viewBox="0 0 28 20" aria-hidden="true">
+            <path fill="#009246" d="M0 0h9.34v20H0z" />
+            <path fill="#fff" d="M9.34 0h9.33v20H9.34z" />
+            <path fill="#ce2b37" d="M18.67 0H28v20h-9.33z" />
+          </svg>
+        </a>
+      </div>
+      <button class="menu-button" aria-expanded="false" aria-controls="site-nav">Menu</button>
       <a class="button button-outline header-cta" href="#engagement">Begin a Consultation</a>
     </header>
 
@@ -811,14 +830,14 @@
           <div class="closing-contact-column footer-contact">
             <a href="mailto:Luca@LucaMirone.com">Luca@LucaMirone.com</a>
             <a href="tel:+19173704886">+1 917 370 4886</a>
-            <a
-              class="button contact-card-button"
-              href="luca-mirone-contact.vcf"
-              download="luca-mirone-contact.vcf"
-              type="text/vcard"
-            >
-              Download Contact Card
-            </a>
+            <div class="footer-contact-actions">
+              <a class="button contact-card-button" href="luca-mirone-contact.vcf" download="luca-mirone-contact.vcf" type="text/vcard">Download Contact Card</a>
+              <a class="linkedin-button" href="https://linkedin.com/in/lucamirone" target="_blank" rel="noreferrer" aria-label="Luca Mirone on LinkedIn">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M6.5 8.5h-3v9h3v-9Zm.2-2.8C6.7 4.75 5.93 4 5 4s-1.7.75-1.7 1.7S4.07 7.4 5 7.4s1.7-.75 1.7-1.7Zm14 6.65c0-2.72-1.45-3.98-3.39-3.98-1.56 0-2.26.86-2.65 1.46V8.58h-3v8.92h3v-4.42c0-1.17.22-2.31 1.68-2.31 1.44 0 1.46 1.35 1.46 2.39v4.34h3l-.1-5.15Z" />
+                </svg>
+              </a>
+            </div>
           </div>
           <div class="closing-contact-column closing-location">
             <p class="copyright">© <span id="year"></span> Luca Mirone</p>
