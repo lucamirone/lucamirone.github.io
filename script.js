@@ -25,7 +25,7 @@ const engagementItems = [...document.querySelectorAll(".engagement-item")];
 
 const deliveryEmail = "Luca@lucamirone.com";
 const analyticsConsentKey = "lucamirone-analytics-consent";
-const analyticsMeasurementId = "G-3RNHB3J5TY";
+const analyticsMeasurementId = "G-5L3N934J2F";
 const analyticsVisitKey = "lucamirone-last-visit";
 const analyticsSessionVisitKey = "lucamirone-session-visit-recorded";
 const analyticsLeadScoreKey = "lucamirone-lead-score";
