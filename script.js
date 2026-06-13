@@ -24,6 +24,71 @@ const collapseAssessment = document.querySelector("#collapse-assessment");
 const engagementItems = [...document.querySelectorAll(".engagement-item")];
 
 const deliveryEmail = "Luca@lucamirone.com";
+const analyticsConsentKey = "lucamirone-analytics-consent";
+const analyticsMeasurementId = "G-3RNHB3J5TY";
+let analyticsLoaded = false;
+
+function loadGoogleAnalytics() {
+  if (analyticsLoaded || typeof window.gtag !== "function") return;
+  analyticsLoaded = true;
+
+  const script = document.createElement("script");
+  script.async = true;
+  script.src = `https://www.googletagmanager.com/gtag/js?id=${analyticsMeasurementId}`;
+  document.head.append(script);
+
+  window.gtag("js", new Date());
+  window.gtag("config", analyticsMeasurementId);
+}
+
+function updateAnalyticsConsent(granted) {
+  if (typeof window.gtag !== "function") return;
+  window.gtag("consent", "update", {
+    analytics_storage: granted ? "granted" : "denied"
+  });
+  if (granted) loadGoogleAnalytics();
+}
+
+function trackAnalyticsEvent(name, parameters = {}) {
+  if (
+    localStorage.getItem(analyticsConsentKey) !== "granted" ||
+    typeof window.gtag !== "function"
+  ) return;
+  window.gtag("event", name, parameters);
+}
+
+function configureAnalyticsConsent() {
+  const banner = document.querySelector("#analytics-consent");
+  const savedConsent = localStorage.getItem(analyticsConsentKey);
+
+  if (savedConsent === "granted") updateAnalyticsConsent(true);
+  if (!savedConsent) banner?.removeAttribute("hidden");
+
+  document.querySelector("#accept-analytics")?.addEventListener("click", () => {
+    localStorage.setItem(analyticsConsentKey, "granted");
+    updateAnalyticsConsent(true);
+    banner.hidden = true;
+  });
+
+  document.querySelector("#reject-analytics")?.addEventListener("click", () => {
+    localStorage.setItem(analyticsConsentKey, "denied");
+    updateAnalyticsConsent(false);
+    banner.hidden = true;
+  });
+
+  document.querySelectorAll('a[href$=".vcf"]').forEach((link) => {
+    link.addEventListener("click", () => {
+      trackAnalyticsEvent("contact_download", { file_name: "luca-mirone-contact.vcf" });
+    });
+  });
+
+  document.querySelector("#advisory-assessment")?.addEventListener("submit", () => {
+    trackAnalyticsEvent("generate_lead", { form_name: "advisory_assessment" });
+  });
+  document.querySelector("#intake-form")?.addEventListener("submit", () => {
+    trackAnalyticsEvent("generate_lead", { form_name: "contact_form" });
+  });
+}
 
 function addHiddenField(form, name, value) {
   if (form.querySelector(`[name="${name}"]`)) return;
@@ -148,6 +213,7 @@ function configureFormDelivery() {
 }
 
 configureFormDelivery();
+configureAnalyticsConsent();
 
 function setAssessmentOpen(open) {
   assessmentPanel?.classList.toggle("is-open", open);

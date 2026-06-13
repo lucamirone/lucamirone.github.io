@@ -8,6 +8,16 @@
       content="Luca Mirone provides strategic advisory for real estate investment, U.S. business development, luxury brands, and international business."
     />
     <title>Luca Mirone | Business Advisory</title>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag("consent", "default", {
+        analytics_storage: "denied",
+        ad_storage: "denied",
+        ad_user_data: "denied",
+        ad_personalization: "denied"
+      });
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -818,5 +828,15 @@
         </div>
       </div>
     </footer>
+    <aside id="analytics-consent" class="analytics-consent" aria-label="Cookie preferences" hidden>
+      <p>
+        This website uses Google Analytics only with your consent to understand
+        website traffic and improve its content.
+      </p>
+      <div class="analytics-consent-actions">
+        <button id="reject-analytics" class="button button-outline" type="button">Reject</button>
+        <button id="accept-analytics" class="button button-gold" type="button">Accept</button>
+      </div>
+    </aside>
   </body>
 </html>
