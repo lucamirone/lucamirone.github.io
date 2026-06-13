@@ -1991,6 +1991,7 @@ a, button, summary, input, select, textarea { transition: var(--transition); }
 }
 .final-contact-footer .section-shell { padding-block: clamp(52px, 7vw, 82px); }
 .footer-contact-card {
+  scroll-margin-top: 86px;
   padding: clamp(34px, 5vw, 58px);
   border: 0;
   border-radius: 0;

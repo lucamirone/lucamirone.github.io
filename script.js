@@ -446,6 +446,18 @@ document.addEventListener("click", (event) => {
   window.setTimeout(() => assessmentSection?.scrollIntoView({ behavior: "smooth" }), 120);
 });
 
+function alignContactHashTarget() {
+  if (window.location.hash !== "#contact") return;
+  const contactTarget = document.querySelector("#contact");
+  if (!contactTarget) return;
+  window.setTimeout(() => contactTarget.scrollIntoView({ block: "start" }), 80);
+  window.setTimeout(() => contactTarget.scrollIntoView({ block: "start" }), 500);
+}
+
+window.addEventListener("load", alignContactHashTarget);
+window.addEventListener("hashchange", alignContactHashTarget);
+alignContactHashTarget();
+
 engagementItems.forEach((item) => {
   item.addEventListener("toggle", () => {
     if (!item.open) return;
