@@ -50,6 +50,7 @@ h3 { font-size: 27px; line-height: 1; }
 .login-panel input { height: 40px; margin-top: 6px; padding: 0 10px; border: 1px solid var(--line); font-size: 12px; }
 .login-panel .error { color: var(--red); }
 .status-banner { margin-top: 28px; padding: 12px 15px; border-left: 3px solid var(--gold); background: var(--gold-soft); font-size: 10px; }
+.status-banner.error { border-left-color: var(--red); background: #f8e9e8; color: var(--red); }
 .dashboard-section { margin-top: 62px; scroll-margin-top: 20px; }
 .section-heading, .panel-heading { display: flex; align-items: flex-end; justify-content: space-between; gap: 20px; }
 .section-heading > span { color: var(--muted); font-size: 9px; }
