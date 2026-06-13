@@ -191,7 +191,7 @@ function configureFormDelivery() {
     intakeForm.method = "POST";
     addHiddenField(intakeForm, "_subject", "New Consultation Request from lucamirone.com");
     addHiddenField(intakeForm, "_template", "table");
-    addHiddenField(intakeForm, "_next", "https://lucamirone.com/it/?submitted=contact#contact");
+    addHiddenField(intakeForm, "_next", "https://lucamirone.com/it/?submitted=contact#consultation");
     if (!intakeForm.querySelector('[name="_honey"]')) {
       const honey = document.createElement("input");
       honey.className = "form-honey";
@@ -203,6 +203,8 @@ function configureFormDelivery() {
 
     const submitButton = intakeForm.querySelector('button[type="submit"]');
     if (submitButton) submitButton.textContent = "Invia messaggio";
+    const privacyNote = intakeForm.querySelector(".form-privacy-note");
+    if (privacyNote) privacyNote.innerHTML = 'Le informazioni inviate tramite questo modulo sono gestite secondo la <a href="../privacy-policy/">Privacy Policy</a>.';
     intakeForm.querySelector(".form-success")?.remove();
     addSubmissionConfirmation(
       intakeForm,
