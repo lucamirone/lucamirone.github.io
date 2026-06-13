@@ -127,7 +127,6 @@ function recommendations(events, devices, sources) {
 
 export default async function handler(request, response) {
   if (!authorized(request)) {
-    response.setHeader("WWW-Authenticate", "Basic realm=\"Luca Mirone Lead Intelligence\"");
     return response.status(401).json({ error: "Authentication required" });
   }
 
