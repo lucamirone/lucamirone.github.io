@@ -2089,8 +2089,8 @@ a, button, summary, input, select, textarea { transition: var(--transition); }
   transform: translateY(-2px);
 }
 .footer-download-button svg {
-  width: 28px;
-  height: 28px;
+  width: 42px;
+  height: 42px;
   flex: 0 0 auto;
   fill: none;
   stroke: currentColor;
