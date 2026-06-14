@@ -380,10 +380,6 @@ function configureFormDelivery() {
       intakeForm.prepend(honey);
     }
 
-    const submitButton = intakeForm.querySelector('button[type="submit"]');
-    if (submitButton) submitButton.textContent = "Submit Consultation Request";
-    const privacyNote = intakeForm.querySelector(".form-privacy-note");
-    if (privacyNote) privacyNote.innerHTML = 'Information submitted through this form is handled according to the <a href="privacy-policy/">Privacy Policy</a>.';
     intakeForm.querySelector(".form-success")?.remove();
     addSubmissionConfirmation(
       intakeForm,

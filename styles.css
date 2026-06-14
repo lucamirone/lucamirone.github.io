@@ -1686,6 +1686,7 @@ a, button, summary, input, select, textarea { transition: var(--transition); }
   color: var(--color-text);
   background: var(--color-background);
   border-top: 0;
+  overflow: clip;
 }
 .consultation::after {
   display: none;
@@ -1695,6 +1696,7 @@ a, button, summary, input, select, textarea { transition: var(--transition); }
   position: relative;
   color: var(--white);
   background:
+    radial-gradient(circle at 18% 10%, rgba(46,91,126,.28), transparent 34%),
     linear-gradient(135deg, #06243A 0%, #031827 100%);
 }
 .consultation-band::after {
@@ -1707,53 +1709,120 @@ a, button, summary, input, select, textarea { transition: var(--transition); }
   background: var(--color-accent);
 }
 .consultation-band-inner {
-  min-height: 330px;
-  padding-block: clamp(58px, 7vw, 92px);
+  min-height: clamp(420px, 38vw, 530px);
+  padding-block: clamp(76px, 8vw, 116px) clamp(108px, 10vw, 150px);
   display: flex;
-  align-items: center;
+  align-items: flex-start;
 }
 .consultation-copy {
-  max-width: 830px;
+  max-width: 720px;
+}
+.consultation-eyebrow {
+  margin: 0 0 28px;
+  color: var(--color-accent);
+  font-family: var(--font-ui);
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: .19em;
+  text-transform: uppercase;
+}
+.consultation-eyebrow::after {
+  width: 58px;
+  height: 1px;
+  margin-top: 18px;
+  display: block;
+  content: "";
+  background: linear-gradient(90deg, var(--color-accent), rgba(255,255,255,.34));
 }
 .consultation-copy h2 {
-  max-width: 760px;
+  max-width: 690px;
   color: var(--white);
+  font-size: clamp(54px, 6.1vw, 82px);
+  line-height: .98;
+  letter-spacing: -.025em;
 }
 .consultation-copy > p {
-  max-width: 620px;
+  max-width: 580px;
+  margin-top: 30px;
   color: var(--color-dark-muted);
+  font-size: 17px;
+  line-height: 1.8;
 }
 .consultation-form-section {
-  padding: clamp(64px, 8vw, 106px) 0;
+  position: relative;
+  padding: 0 0 60px;
   background: var(--color-background);
 }
 .consultation-form-shell {
-  display: block;
+  position: relative;
+  z-index: 2;
+  width: min(1360px, calc(100% - 48px));
+  margin-top: clamp(-112px, -7vw, -78px);
+  display: grid;
+  grid-template-columns: minmax(0, .48fr) minmax(520px, .52fr);
+  align-items: center;
+  gap: clamp(40px, 4.5vw, 64px);
 }
-.form-progress { gap: 7px; }
-.form-progress span { width: 48px; height: 3px; border-radius: 10px; background: rgba(255,255,255,.22); }
+.form-progress { display: flex; gap: 10px; margin-top: 48px; }
+.form-progress span { width: 52px; height: 3px; border-radius: 10px; background: rgba(255,255,255,.22); }
 .form-progress span.active,
 .form-progress span:nth-child(1).active,
 .form-progress span:nth-child(2).active,
 .form-progress span:nth-child(3).active { background: var(--color-accent); }
+.consultation-sketch {
+  width: min(760px, calc(100% + 105px));
+  max-width: none;
+  margin-top: clamp(24px, 3vw, 48px);
+  margin-left: clamp(-40px, -3vw, -24px);
+  justify-self: start;
+  min-width: 0;
+}
+.consultation-sketch img {
+  width: 100%;
+  max-width: 760px;
+  height: auto;
+  margin-top: 20px;
+  display: block;
+  object-fit: contain;
+  mix-blend-mode: multiply;
+}
 .intake-form {
   min-height: 0;
-  max-width: 880px;
-  margin-inline: auto;
-  padding: var(--card-padding);
+  width: 100%;
+  max-width: 690px;
+  justify-self: end;
+  margin-top: 40px;
+  margin-left: -20px;
+  padding: clamp(32px, 3.4vw, 48px);
   color: var(--color-text);
-  background: #fffdf9;
-  border: 1px solid rgba(184,138,69,.34);
-  border-radius: var(--radius-lg);
-  box-shadow: 0 22px 54px rgba(6,36,58,.1);
+  background: linear-gradient(180deg, #fffdf9 0%, #fffaf2 100%);
+  border: 1px solid rgba(184,138,69,.4);
+  border-radius: 16px;
+  box-shadow: 0 28px 72px rgba(6,36,58,.16), 0 2px 0 rgba(255,255,255,.75) inset;
 }
-.intake-form label { color: var(--color-text); font-weight: 700; }
+.intake-form label {
+  margin-top: 0;
+  display: block;
+  color: var(--color-text);
+  font-family: var(--font-ui);
+  font-size: 11px;
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+}
 .intake-form input,
 .intake-form select,
 .intake-form textarea {
+  width: 100%;
+  min-height: 54px;
+  margin-top: 11px;
+  padding-inline: 16px;
   color: var(--color-text);
-  background: #fffefa;
-  border-color: rgba(6,36,58,.2);
+  background: rgba(255,255,255,.58);
+  border-color: rgba(16,35,61,.22);
+  border-radius: 6px;
 }
 .intake-form select option { color: var(--color-text); background: var(--color-surface); }
 .intake-form input::placeholder,
@@ -1761,6 +1830,88 @@ a, button, summary, input, select, textarea { transition: var(--transition); }
 .intake-form input:focus,
 .intake-form select:focus,
 .intake-form textarea:focus { border-color: var(--color-accent); }
+.consultation-fields {
+  display: grid;
+  gap: 22px;
+}
+.consultation-form-label {
+  margin: 34px 0 24px;
+  color: var(--color-accent-dark);
+  font-family: var(--font-ui);
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: .21em;
+  text-transform: uppercase;
+}
+.intake-form .form-privacy-note {
+  margin: 0;
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr);
+  align-items: start;
+  gap: 20px;
+  color: var(--color-muted);
+  font-size: 14px;
+  line-height: 1.8;
+}
+.intake-form .form-privacy-note svg {
+  width: 38px;
+  height: 38px;
+  color: var(--color-accent-dark);
+  stroke: currentColor;
+  stroke-width: 1.5;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.consultation-submit {
+  width: fit-content;
+  min-width: 290px;
+  min-height: 56px;
+  margin-top: 30px;
+  padding-inline: 24px 18px;
+  gap: 28px;
+  color: var(--white);
+  background: linear-gradient(180deg, #c5964a 0%, #a67831 100%);
+  border-color: #a67831;
+  border-radius: 6px;
+  box-shadow: 0 14px 28px rgba(135,103,53,.26);
+}
+.consultation-submit svg {
+  width: 23px;
+  height: 23px;
+  flex: 0 0 auto;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.consultation-submit:hover {
+  background: linear-gradient(180deg, #d0a357 0%, #ad8039 100%);
+  border-color: #ad8039;
+  box-shadow: 0 18px 34px rgba(135,103,53,.3);
+}
+.consultation-reply-note {
+  margin: 18px 0 0;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  color: var(--color-muted);
+  font-size: 13px;
+  line-height: 1.4;
+}
+.consultation-reply-note svg {
+  width: 22px;
+  height: 22px;
+  flex: 0 0 auto;
+  color: var(--color-accent-dark);
+  stroke: currentColor;
+  stroke-width: 1.8;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
 .text-button { color: var(--color-muted); font-family: var(--font-ui); font-weight: 700; }
 .text-button:hover { color: var(--color-accent-dark); }
 .form-success h3 { font-family: var(--font-heading); }
@@ -2906,6 +3057,22 @@ a, button, summary, input, select, textarea { transition: var(--transition); }
   }
   .site-header nav a { padding: 12px 0; }
   .site-header nav a::after { bottom: 7px; transform-origin: left; }
+  #experience.case-study {
+    padding-block: 82px;
+  }
+  .consultation-band-inner {
+    padding-block: clamp(14px, 1.46vw, 18px) clamp(108px, 10vw, 150px);
+  }
+  .consultation-form-shell {
+    width: min(100% - 36px, 1120px);
+    grid-template-columns: minmax(0, .48fr) minmax(430px, .52fr);
+    gap: 44px;
+  }
+  .consultation-sketch {
+    width: min(640px, calc(100% + 46px));
+    margin-top: 44px;
+    margin-left: -18px;
+  }
   .menu-button {
     margin-left: 0;
     padding: 9px 12px;
@@ -2951,12 +3118,41 @@ a, button, summary, input, select, textarea { transition: var(--transition); }
   .case-study,
   .process,
   .assessment.has-open { padding: 96px 0; }
+  #experience.case-study { padding: 96px 0; }
   .consultation { padding: 0; }
   .approach-main,
   .case-grid,
-  .process-layout,
-  .consultation-grid { grid-template-columns: 1fr; }
-  .consultation-band-inner { min-height: 300px; }
+  .process-layout { grid-template-columns: 1fr; }
+  .consultation-band-inner {
+    min-height: 0;
+    padding-block: 76px 68px;
+  }
+  .consultation-form-section { padding: 0 0 76px; }
+  .consultation-form-shell {
+    margin-top: 0;
+    grid-template-columns: 1fr;
+    gap: 26px;
+  }
+  .consultation-sketch {
+    width: min(100%, 760px);
+    margin: 26px auto 4px;
+    justify-self: center;
+  }
+  .consultation-sketch img {
+    width: 100%;
+    max-width: 720px;
+    margin-inline: auto;
+  }
+  .intake-form {
+    max-width: 680px;
+    justify-self: center;
+    margin: 0;
+  }
+  .consultation-submit {
+    width: 100%;
+    min-width: 0;
+    justify-content: space-between;
+  }
   .approach-image { min-height: 500px; }
   .engagement-details { padding-left: 134px; }
   .closing-about {
@@ -3019,7 +3215,7 @@ a, button, summary, input, select, textarea { transition: var(--transition); }
       linear-gradient(180deg, #061d38 0%, #04182d 100%);
   }
   .qr-contact-layout {
-    padding-block: 34px 40px;
+    padding-block: 34px 0;
     grid-template-columns: 1fr;
     gap: 28px;
   }
@@ -3164,10 +3360,13 @@ a, button, summary, input, select, textarea { transition: var(--transition); }
     border-left: 0;
   }
   .qr-page-footer {
-    padding: 24px 15px 30px;
+    padding: 44px 15px 30px;
   }
   .qr-page-footer .footer-bottom-row {
     width: min(100%, var(--container));
+  }
+  .qr-page-footer .footer-bottom-row p {
+    margin-top: 10px;
   }
   .legal-hero {
     padding: 132px 0 58px;
@@ -3194,17 +3393,62 @@ a, button, summary, input, select, textarea { transition: var(--transition); }
   .case-study,
   .process,
   .assessment.has-open { padding: var(--section-padding-mobile) 0; }
+  #experience.case-study { padding: var(--section-padding-mobile) 0; }
   .consultation { padding: 0; }
   .consultation-band-inner {
     min-height: 0;
-    padding-block: 58px;
+    padding-block: 64px 48px;
   }
-  .consultation-form-section { padding: 54px 0 62px; }
+  .consultation-band::after {
+    height: 18px;
+    bottom: -1px;
+    background: linear-gradient(168deg, transparent 0 47%, var(--color-accent) 48% 52%, var(--color-background) 53% 100%);
+  }
+  .consultation-form-section { padding: 0 0 58px; }
+  .consultation-form-shell {
+    width: min(100% - 32px, 1180px);
+    margin-top: 0;
+    gap: 22px;
+  }
+  .consultation-eyebrow {
+    margin-bottom: 22px;
+    font-size: 12px;
+    letter-spacing: .16em;
+  }
+  .consultation-eyebrow::after {
+    width: 62px;
+    margin-top: 16px;
+  }
   .approach h2,
   .case-study h2,
   .process h2,
   .consultation h2,
   .approach-copy h2 { font-size: 46px; }
+  .consultation-copy h2 {
+    font-size: clamp(42px, 11.3vw, 54px);
+    line-height: 1.02;
+  }
+  .consultation-copy > p {
+    margin-top: 26px;
+    font-size: 16px;
+    line-height: 1.65;
+  }
+  .form-progress {
+    margin-top: 38px;
+    gap: 9px;
+  }
+  .form-progress span {
+    width: 46px;
+    height: 3px;
+  }
+  .consultation-sketch {
+    width: 100%;
+    margin: 16px auto 16px;
+  }
+  .consultation-sketch img {
+    width: 100%;
+    max-width: none;
+  }
   .approach-image { min-height: 370px; border-radius: var(--radius-md); }
   .approach-value {
     min-height: 88px;
@@ -3247,7 +3491,34 @@ a, button, summary, input, select, textarea { transition: var(--transition); }
   .intake-form input,
   .intake-form select,
   .intake-form textarea { font-size: 16px; }
-  .intake-form { min-height: 0; padding: 24px 18px; border-radius: var(--radius-md); }
+  .intake-form {
+    min-height: 0;
+    padding: 28px 26px;
+    border-radius: var(--radius-md);
+  }
+  .intake-form .form-privacy-note {
+    grid-template-columns: 40px minmax(0, 1fr);
+    gap: 16px;
+    font-size: 14px;
+  }
+  .consultation-form-label {
+    margin: 34px 0 24px;
+    font-size: 11px;
+    letter-spacing: .16em;
+  }
+  .consultation-fields { gap: 24px; }
+  .consultation-submit {
+    width: 100%;
+    min-width: 0;
+    justify-content: space-between;
+    min-height: 58px;
+    padding-inline: 22px 18px;
+    gap: 18px;
+  }
+  .consultation-reply-note {
+    justify-content: center;
+    font-size: 13px;
+  }
   .site-footer { width: 100vw; padding-inline: 20px; }
   .closing-section .section-shell { padding-block: 62px 30px; }
   .closing-about {

@@ -201,10 +201,6 @@ function configureFormDelivery() {
       intakeForm.prepend(honey);
     }
 
-    const submitButton = intakeForm.querySelector('button[type="submit"]');
-    if (submitButton) submitButton.textContent = "Invia messaggio";
-    const privacyNote = intakeForm.querySelector(".form-privacy-note");
-    if (privacyNote) privacyNote.innerHTML = 'Le informazioni inviate tramite questo modulo sono gestite secondo la <a href="../privacy-policy/">Privacy Policy</a>.';
     intakeForm.querySelector(".form-success")?.remove();
     addSubmissionConfirmation(
       intakeForm,
