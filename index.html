@@ -26,8 +26,8 @@
     />
     <link rel="alternate" hreflang="en" href="https://www.lucamirone.com/" />
     <link rel="alternate" hreflang="it" href="https://www.lucamirone.com/it/" />
-    <link rel="stylesheet" href="styles.css?v=consultation-tablet-annotations-20260614" />
-    <script src="script.js?v=consultation-tablet-annotations-20260614" defer></script>
+    <link rel="stylesheet" href="styles.css?v=consultation-three-phase-20260615" />
+    <script src="script.js?v=consultation-three-phase-20260615" defer></script>
   </head>
   <body>
     <header class="site-header">
@@ -704,28 +704,110 @@
               </svg>
               <span>Your information is kept private and used only to coordinate your initial consultation. <a href="privacy-policy/">Privacy Policy.</a></span>
             </p>
-            <p class="consultation-form-label">Quick Form · Initial Consultation</p>
-            <div class="consultation-fields">
-              <label>
-                Name
-                <input name="name" autocomplete="name" placeholder="Your full name" required />
-              </label>
-              <label>
-                Email
-                <input name="email" type="email" autocomplete="email" placeholder="Your email address" required />
-              </label>
-              <label>
-                Company or organization
-                <input name="company" autocomplete="organization" placeholder="Your company or organization" />
-              </label>
+            <div class="form-step active" data-step="1">
+              <p class="consultation-form-label">Phase 1 of 3 · Contact</p>
+              <div class="consultation-fields">
+                <label>
+                  Name
+                  <input name="name" autocomplete="name" placeholder="Your full name" required />
+                </label>
+                <label>
+                  Email
+                  <input name="email" type="email" autocomplete="email" placeholder="Your email address" required />
+                </label>
+                <label>
+                  Company
+                  <input name="company" autocomplete="organization" placeholder="Your company or organization" />
+                </label>
+              </div>
+              <button class="button button-gold consultation-submit next-step" type="button">
+                <span>Continue</span>
+                <svg aria-hidden="true" viewBox="0 0 24 24">
+                  <path d="M5 12h13" />
+                  <path d="m13 6 6 6-6 6" />
+                </svg>
+              </button>
             </div>
-            <button class="button button-gold consultation-submit" type="submit">
-              <span>Request Consultation</span>
-              <svg aria-hidden="true" viewBox="0 0 24 24">
-                <path d="M5 12h13" />
-                <path d="m13 6 6 6-6 6" />
-              </svg>
-            </button>
+            <div class="form-step" data-step="2">
+              <p class="consultation-form-label">Phase 2 of 3 · Opportunity</p>
+              <div class="consultation-fields">
+                <label>
+                  Area
+                  <select name="area" required>
+                    <option value="">Select one</option>
+                    <option>Real Estate Investment</option>
+                    <option>U.S. Business Development</option>
+                    <option>Luxury Brands</option>
+                    <option>International Business</option>
+                    <option>Business Acquisition or Sale</option>
+                    <option>Restaurant or Hospitality</option>
+                    <option>Multiple Areas</option>
+                    <option>Other</option>
+                  </select>
+                </label>
+                <label>
+                  Stage
+                  <select name="stage" required>
+                    <option value="">Select one</option>
+                    <option>Exploring an Opportunity</option>
+                    <option>Planning Market Entry</option>
+                    <option>Actively Growing</option>
+                    <option>Established and Expanding</option>
+                    <option>Evaluating an Investment</option>
+                    <option>Preparing a Transaction</option>
+                  </select>
+                </label>
+                <label>
+                  Timeline
+                  <select name="timeline" required>
+                    <option value="">Select one</option>
+                    <option>Immediate</option>
+                    <option>Within 30 Days</option>
+                    <option>Within 3 Months</option>
+                    <option>Within 6 Months</option>
+                    <option>Long-Term Planning</option>
+                    <option>Exploring Only</option>
+                  </select>
+                </label>
+              </div>
+              <div class="form-buttons">
+                <button class="text-button previous-step" type="button">Back</button>
+                <button class="button button-gold consultation-submit next-step" type="button">
+                  <span>Continue</span>
+                  <svg aria-hidden="true" viewBox="0 0 24 24">
+                    <path d="M5 12h13" />
+                    <path d="m13 6 6 6-6 6" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+            <div class="form-step" data-step="3">
+              <p class="consultation-form-label">Phase 3 of 3 · Priorities</p>
+              <div class="consultation-fields">
+                <label>
+                  Objectives
+                  <textarea name="objectives" rows="4" placeholder="What would you like to accomplish?" required></textarea>
+                </label>
+                <label>
+                  Message
+                  <textarea name="message" rows="4" placeholder="Share any additional context that would help Luca prepare."></textarea>
+                </label>
+              </div>
+              <label class="form-consent">
+                <input type="checkbox" name="contact_terms_consent" value="Accepted Privacy Policy and Terms of Use" required />
+                <span>By submitting this form, you agree to the <a href="privacy-policy/">Privacy Policy</a> and <a href="terms.html">Terms of Use</a>.</span>
+              </label>
+              <div class="form-buttons">
+                <button class="text-button previous-step" type="button">Back</button>
+                <button class="button button-gold consultation-submit" type="submit">
+                  <span>Request Consultation</span>
+                  <svg aria-hidden="true" viewBox="0 0 24 24">
+                    <path d="M5 12h13" />
+                    <path d="m13 6 6 6-6 6" />
+                  </svg>
+                </button>
+              </div>
+            </div>
             <p class="consultation-reply-note">
               <svg aria-hidden="true" viewBox="0 0 24 24">
                 <path d="M7 3v4M17 3v4M4.5 9.5h15M6 5.5h12a2 2 0 0 1 2 2V18a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7.5a2 2 0 0 1 2-2z" />

@@ -1914,6 +1914,16 @@ a, button, summary, input, select, textarea { transition: var(--transition); }
 }
 .text-button { color: var(--color-muted); font-family: var(--font-ui); font-weight: 700; }
 .text-button:hover { color: var(--color-accent-dark); }
+.form-step .consultation-submit { margin-top: 30px; }
+.form-buttons .consultation-submit { margin-top: 0; }
+.form-buttons {
+  flex-wrap: wrap;
+  margin-top: 30px;
+}
+.form-buttons .text-button {
+  margin-top: 0;
+  min-height: 56px;
+}
 .form-success h3 { font-family: var(--font-heading); }
 .form-success p { color: var(--color-muted); }
 
@@ -2774,6 +2784,7 @@ a, button, summary, input, select, textarea { transition: var(--transition); }
 .form-consent input {
   width: 16px;
   height: 16px;
+  min-height: 16px;
   margin: 3px 0 0;
   accent-color: var(--color-accent);
 }
