@@ -26,8 +26,8 @@
     />
     <link rel="alternate" hreflang="en" href="https://www.lucamirone.com/" />
     <link rel="alternate" hreflang="it" href="https://www.lucamirone.com/it/" />
-    <link rel="stylesheet" href="../styles.css?v=consultation-it-layout-20260614" />
-    <script src="script.js?v=consultation-it-layout-20260614" defer></script>
+    <link rel="stylesheet" href="../styles.css?v=consultation-it-three-phase-20260615" />
+    <script src="script.js?v=consultation-it-three-phase-20260615" defer></script>
   </head>
   <body>
     <header class="site-header">
@@ -467,33 +467,120 @@
               </svg>
               <span>Le informazioni saranno mantenute private e utilizzate solo per coordinare la consultazione iniziale. <a href="../privacy-policy/">Privacy Policy.</a></span>
             </p>
-            <p class="consultation-form-label">MODULO RAPIDO · CONSULTAZIONE INIZIALE</p>
-            <div class="consultation-fields">
-              <label>
-                Nome
-                <input name="name" autocomplete="name" placeholder="Il tuo nome completo" required />
-              </label>
-              <label>
-                Email
-                <input name="email" type="email" autocomplete="email" placeholder="Il tuo indirizzo email" required />
-              </label>
-              <label>
-                Azienda o Organizzazione
-                <input name="company" autocomplete="organization" placeholder="La tua azienda o organizzazione" />
-              </label>
+            <div class="form-step active" data-step="1">
+              <p class="consultation-form-label">Fase 1 di 3 · Contatto</p>
+              <div class="consultation-fields">
+                <label>
+                  Nome
+                  <input name="name" autocomplete="name" placeholder="Il tuo nome completo" required />
+                </label>
+                <label>
+                  Email
+                  <input name="email" type="email" autocomplete="email" placeholder="Il tuo indirizzo email" required />
+                </label>
+                <label>
+                  Azienda
+                  <input name="company" autocomplete="organization" placeholder="La tua azienda o organizzazione" />
+                </label>
+              </div>
+              <button class="button button-gold consultation-submit next-step" type="button">
+                <span>Continua</span>
+                <svg aria-hidden="true" viewBox="0 0 24 24">
+                  <path d="M5 12h13" />
+                  <path d="m13 6 6 6-6 6" />
+                </svg>
+              </button>
             </div>
-            <button class="button button-gold consultation-submit" type="submit">
-              <span>RICHIEDI UNA CONSULTAZIONE</span>
-              <svg aria-hidden="true" viewBox="0 0 24 24">
-                <path d="M5 12h13" />
-                <path d="m13 6 6 6-6 6" />
-              </svg>
-            </button>
+            <div class="form-step" data-step="2">
+              <p class="consultation-form-label">Fase 2 di 3 · Opportunità</p>
+              <div class="consultation-fields">
+                <label>
+                  Area
+                  <select name="area" required>
+                    <option value="">Seleziona una voce</option>
+                    <option>Food &amp; Beverage</option>
+                    <option>Immobiliare</option>
+                    <option>Edilizia</option>
+                    <option>Moda</option>
+                    <option>Ospitalità</option>
+                    <option>Arte</option>
+                    <option>Design italiano</option>
+                    <option>Nautica</option>
+                    <option>Import / Export</option>
+                    <option>Beni di lusso</option>
+                    <option>Prodotti di consumo</option>
+                    <option>Servizi professionali</option>
+                    <option>Investimenti / Acquisizioni</option>
+                  </select>
+                </label>
+                <label>
+                  Fase
+                  <select name="stage" required>
+                    <option value="">Seleziona una voce</option>
+                    <option>Esplorazione di un'opportunità</option>
+                    <option>Pianificazione dell'ingresso sul mercato</option>
+                    <option>In fase di crescita</option>
+                    <option>Attività consolidata in espansione</option>
+                    <option>Valutazione di un investimento</option>
+                    <option>Preparazione di una transazione</option>
+                  </select>
+                </label>
+                <label>
+                  Tempistiche
+                  <select name="timeline" required>
+                    <option value="">Seleziona una voce</option>
+                    <option>Immediata</option>
+                    <option>Entro 30 giorni</option>
+                    <option>Entro 3 mesi</option>
+                    <option>Entro 6 mesi</option>
+                    <option>Pianificazione a lungo termine</option>
+                    <option>Solo esplorazione</option>
+                  </select>
+                </label>
+              </div>
+              <div class="form-buttons">
+                <button class="text-button previous-step" type="button">Indietro</button>
+                <button class="button button-gold consultation-submit next-step" type="button">
+                  <span>Continua</span>
+                  <svg aria-hidden="true" viewBox="0 0 24 24">
+                    <path d="M5 12h13" />
+                    <path d="m13 6 6 6-6 6" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+            <div class="form-step" data-step="3">
+              <p class="consultation-form-label">Fase 3 di 3 · Priorità</p>
+              <div class="consultation-fields">
+                <label>
+                  Obiettivi
+                  <textarea name="objectives" rows="4" placeholder="Che cosa vorresti ottenere?" required></textarea>
+                </label>
+                <label>
+                  Messaggio
+                  <textarea name="message" rows="4" placeholder="Condividi qualsiasi altro contesto utile per aiutare Luca a prepararsi."></textarea>
+                </label>
+              </div>
+              <label class="form-consent">
+                <input type="checkbox" name="contact_terms_consent" value="Privacy Policy and Terms of Use accepted" required />
+                <span>Inviando questo modulo, accetti la <a href="../privacy-policy/">Privacy Policy</a> e i <a href="../terms-it.html">Termini di Utilizzo</a>.</span>
+              </label>
+              <div class="form-buttons">
+                <button class="text-button previous-step" type="button">Indietro</button>
+                <button class="button button-gold consultation-submit" type="submit">
+                  <span>Richiedi una consultazione</span>
+                  <svg aria-hidden="true" viewBox="0 0 24 24">
+                    <path d="M5 12h13" />
+                    <path d="m13 6 6 6-6 6" />
+                  </svg>
+                </button>
+              </div>
+            </div>
             <p class="consultation-reply-note">
               <svg aria-hidden="true" viewBox="0 0 24 24">
                 <path d="M7 3v4M17 3v4M4.5 9.5h15M6 5.5h12a2 2 0 0 1 2 2V18a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7.5a2 2 0 0 1 2-2z" />
               </svg>
-              <span>Risponderemo entro 1 giorno lavorativo.</span>
+              <span>Risponderemo entro 3 giorni lavorativi.</span>
             </p>
             </form>
           </div>
