@@ -24,6 +24,9 @@ document.querySelectorAll("[data-contact-action]").forEach((link) => {
   if (action === "text") {
     link.href = `sms:${contactParts.phone.join("")}`;
   }
+  if (action === "whatsapp") {
+    link.href = `https://wa.me/${contactParts.phone.join("").replace(/\D/g, "")}`;
+  }
   if (action === "email") {
     link.href = `mailto:${contactParts.email.join("@")}`;
   }
