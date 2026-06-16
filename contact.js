@@ -21,6 +21,9 @@ document.querySelectorAll("[data-contact-action]").forEach((link) => {
   if (action === "call") {
     link.href = `tel:${contactParts.phone.join("")}`;
   }
+  if (action === "text") {
+    link.href = `sms:${contactParts.phone.join("")}`;
+  }
   if (action === "email") {
     link.href = `mailto:${contactParts.email.join("@")}`;
   }
