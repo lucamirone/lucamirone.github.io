@@ -1824,6 +1824,12 @@ a, button, summary, input, select, textarea { transition: var(--transition); }
   border-color: rgba(16,35,61,.22);
   border-radius: 6px;
 }
+.intake-form select {
+  height: 62px;
+  min-height: 62px;
+  padding: 0 48px 0 16px;
+  line-height: 1.35;
+}
 .intake-form select option { color: var(--color-text); background: var(--color-surface); }
 .intake-form input::placeholder,
 .intake-form textarea::placeholder { color: #8e969c; }
