@@ -2991,14 +2991,36 @@ a, button, summary, input, select, textarea { transition: var(--transition); }
 .qr-action-list .button {
   width: 100%;
   min-height: 54px;
-  padding-inline: 16px;
-  gap: 12px;
-  text-align: center;
+  padding: 0;
+  gap: 0;
+  justify-content: flex-start;
+  overflow: hidden;
+  text-align: left;
 }
-.qr-action-list .button span:not(.button-icon) {
-  display: grid;
-  gap: 4px;
+.qr-action-list .button > .button-icon {
+  align-self: stretch;
+  flex: 0 0 20%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-right: 1px solid rgba(199,151,70,.66);
+}
+.qr-action-list .button-gold > .button-icon {
+  border-right-color: rgba(92,63,24,.34);
+}
+.qr-action-list .button > span:not(.button-icon) {
+  flex: 1 1 80%;
+  display: flex;
   min-width: 0;
+  min-height: 100%;
+  padding: 10px clamp(18px, 5vw, 32px);
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 4px;
+  line-height: 1.35;
+  text-align: left;
+  white-space: normal;
 }
 .qr-action-list .button small {
   font-size: 12px;
