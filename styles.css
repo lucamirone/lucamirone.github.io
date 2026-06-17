@@ -3046,6 +3046,12 @@ a, button, summary, input, select, textarea { transition: var(--transition); }
   stroke-linecap: round;
   stroke-linejoin: round;
 }
+.qr-action-list .button > .button-icon .contact-action-icon-img {
+  width: clamp(42px, 12vw, 56px);
+  height: clamp(42px, 12vw, 56px);
+  display: block;
+  object-fit: contain;
+}
 .qr-download-button {
   background: linear-gradient(180deg, #d5a64a, #b9842e);
   border-color: rgba(255,255,255,.14);
